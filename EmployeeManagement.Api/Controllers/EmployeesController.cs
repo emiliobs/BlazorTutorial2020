@@ -106,5 +106,25 @@ namespace EmployeeManagement.Api.Controllers
             }
         }
 
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<Employee>> DeleteEmployee(int id)
+        {
+            try
+            {
+                Employee employeeToDelete = await _employeeRepository.GetEmployeeById(id);
+                if (employeeToDelete == null)
+                {
+                    return NotFound($"Employee with Id = {id} not found.");
+                }
+
+                return await _employeeRepository.DeleteEmployeeById(id);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error Deleting Data.");
+            }
+        }
+
     }
 }

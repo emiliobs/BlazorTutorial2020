@@ -14,6 +14,6 @@ namespace EmployeeManagement.Api.Repository
         Task<Employee> GetEmployeeById(int employeeId);
         Task<Employee> AddEmployee(Employee employee);
         Task<Employee> UpdateEmployee(Employee employee);
-        void DeleteEmployeeById(int employeeId);
+        Task<Employee> DeleteEmployeeById(int employeeId);
     }
 }

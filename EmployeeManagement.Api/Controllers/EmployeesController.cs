@@ -64,6 +64,13 @@ namespace EmployeeManagement.Api.Controllers
                     return BadRequest();
                 }
 
+                var existEmployee = _employeeRepository.GetEmployeeByEmail(employee.Email);
+                if (existEmployee != null)
+                {
+                    ModelState.AddModelError("Email","Employee email already in use.");
+                    return BadRequest(ModelState);
+                }
+
                 var createEmployee = await _employeeRepository.AddEmployee(employee);
 
                 return CreatedAtAction(nameof(GetEmployeeById), new { id = createEmployee.EmployeeId }, createEmployee );

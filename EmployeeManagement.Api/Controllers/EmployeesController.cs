@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using EmployeeManagement.Api.Repository;
+﻿using EmployeeManagement.Api.Repository;
 using EmployeeManagement.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace EmployeeManagement.Api.Controllers
 {
@@ -17,11 +15,11 @@ namespace EmployeeManagement.Api.Controllers
 
         public EmployeesController(IEmployeeRepository employeeRepository)
         {
-            this._employeeRepository = employeeRepository;
+            _employeeRepository = employeeRepository;
         }
 
         [HttpGet]
-       public async Task<ActionResult> GetAllEmployee()
+        public async Task<ActionResult> GetAllEmployee()
         {
             try
             {
@@ -30,7 +28,7 @@ namespace EmployeeManagement.Api.Controllers
             catch (Exception)
             {
 
-                return StatusCode(StatusCodes.Status500InternalServerError,"Error retrieving data from the database");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database");
             }
         }
 
@@ -39,7 +37,7 @@ namespace EmployeeManagement.Api.Controllers
         {
             try
             {
-                var result = await _employeeRepository.GetEmployeeById(id);
+                Employee result = await _employeeRepository.GetEmployeeById(id);
                 if (result == null)
                 {
                     return NotFound();
@@ -64,16 +62,16 @@ namespace EmployeeManagement.Api.Controllers
                     return BadRequest();
                 }
 
-                var existEmployee = _employeeRepository.GetEmployeeByEmail(employee.Email);
+                Task<Employee> existEmployee = _employeeRepository.GetEmployeeByEmail(employee.Email);
                 if (existEmployee != null)
                 {
-                    ModelState.AddModelError("Email","Employee email already in use.");
+                    ModelState.AddModelError("Email", "Employee email already in use.");
                     return BadRequest(ModelState);
                 }
 
-                var createEmployee = await _employeeRepository.AddEmployee(employee);
+                Employee createEmployee = await _employeeRepository.AddEmployee(employee);
 
-                return CreatedAtAction(nameof(GetEmployeeById), new { id = createEmployee.EmployeeId }, createEmployee );
+                return CreatedAtAction(nameof(GetEmployeeById), new { id = createEmployee.EmployeeId }, createEmployee);
 
             }
             catch (Exception)
@@ -82,5 +80,31 @@ namespace EmployeeManagement.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
             }
         }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<Employee>> UpdateEmployee(int id, Employee employee)
+        {
+            try
+            {
+                if (id != employee.EmployeeId)
+                {
+                    return BadRequest("Employee Id mismatch");
+                }
+
+                Employee employeeUpdate = await _employeeRepository.GetEmployeeById(id);
+                if (employeeUpdate == null)
+                {
+                    return NotFound($"Employee wint Id = {id} not found.");
+                }
+
+                return await _employeeRepository.UpdateEmployee(employee);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error Update Data.");
+            }
+        }
+
     }
 }

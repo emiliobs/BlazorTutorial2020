@@ -9,6 +9,7 @@ namespace EmployeeManagement.Api.Repository
     public interface IEmployeeRepository
     {
 
+        Task<IEnumerable<Employee>> Search(string name, Gender? gender);
         Task<IEnumerable<Employee>> GetAllEmployees();
         Task<Employee> GetEmployeeByEmail(string email);
         Task<Employee> GetEmployeeById(int employeeId);

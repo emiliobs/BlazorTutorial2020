@@ -2,7 +2,9 @@
 using EmployeeManagement.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Internal;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace EmployeeManagement.Api.Controllers
@@ -16,6 +18,27 @@ namespace EmployeeManagement.Api.Controllers
         public EmployeesController(IEmployeeRepository employeeRepository)
         {
             _employeeRepository = employeeRepository;
+        }
+
+        [HttpGet("{search}")]
+        public async Task<ActionResult<IEnumerable<Employee>>> Search(string name, Gender? gender)
+        {
+            try
+            {
+                IEnumerable<Employee> result = await _employeeRepository.Search(name, gender);
+
+                if (result.Any())
+                {
+                    return Ok(result);
+                }
+
+                return NotFound();
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
         }
 
         [HttpGet]
@@ -62,16 +85,23 @@ namespace EmployeeManagement.Api.Controllers
                     return BadRequest();
                 }
 
-                Task<Employee> existEmployee = _employeeRepository.GetEmployeeByEmail(employee.Email);
+               var existEmployee = await _employeeRepository.GetEmployeeByEmail(employee.Email);
+
                 if (existEmployee != null)
                 {
                     ModelState.AddModelError("Email", "Employee email already in use.");
                     return BadRequest(ModelState);
                 }
+                else
+                {
+                   
 
-                Employee createEmployee = await _employeeRepository.AddEmployee(employee);
+                    var createEmployee = await _employeeRepository.AddEmployee(employee);
 
-                return CreatedAtAction(nameof(GetEmployeeById), new { id = createEmployee.EmployeeId }, createEmployee);
+                    return CreatedAtAction(nameof(GetEmployeeById), new { id = createEmployee.EmployeeId }, createEmployee);
+                }
+
+               
 
             }
             catch (Exception)

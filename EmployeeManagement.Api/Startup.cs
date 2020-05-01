@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EmployeeManagement.Api.Models;
 using EmployeeManagement.Api.Repository;
+using EmployeeManagement.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -39,6 +40,7 @@ namespace EmployeeManagement.Api
             services.AddScoped<IDepartmentRespository, DepartmentRespository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
+           
             //Rest of code
         }
 

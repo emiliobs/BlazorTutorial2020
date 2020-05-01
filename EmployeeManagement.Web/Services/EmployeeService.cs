@@ -21,5 +21,10 @@ namespace EmployeeManagement.Web.Services
         {
             return await _httpClient.GetJsonAsync<Employee[]>("api/employees");
         }
+
+        public async Task<Employee> GetEmployeeById(int id)
+        {
+            return await _httpClient.GetJsonAsync<Employee>($"api/employees/{id}");
+        }
     }
 }

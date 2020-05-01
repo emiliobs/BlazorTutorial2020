@@ -1,0 +1,29 @@
+﻿@page "/employeedetails/{id}"
+@page "/employeedetails"
+@inherits EmployeeDetailsBase
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                <h1>@Employee.FullName</h1>
+            </div>
+            <div class="card-body text-center">
+                <img class="card-img-top" src="@Employee.PhotoPath" />
+
+                <h4>Employee ID : @Employee.EmployeeId</h4>
+                <h4>Email : @Employee.Email</h4>
+                <h4>Department : @Employee.DepartmentId</h4>
+            </div>
+            <div class="card-footer text-center">
+                <a href="#" class="btn btn-info">Edit</a>
+                <a href="#" class="btn btn-danger">Delete</a>
+                <a href="/" class="btn btn-dark">Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+}

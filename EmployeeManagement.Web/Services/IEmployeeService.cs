@@ -9,5 +9,7 @@ namespace EmployeeManagement.Web.Services
     public interface IEmployeeService
     {
         Task<IEnumerable<Employee>> GetAllEmployees();
+        Task<Employee> GetEmployeeById(int id);
     }
+
 }

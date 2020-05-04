@@ -209,3 +209,7 @@ app {
         transform: rotate(360deg);
     }
 }
+
+.HideFooter{
+    display : none;
+}

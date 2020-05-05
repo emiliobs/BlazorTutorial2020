@@ -18,6 +18,8 @@ namespace EmployeeManagement.Web.Pages
 
         public bool ShowFooter { get; set; } = true;
 
+        protected int SelectedEmployeeCount { get; set; } = 0;
+
         protected override async Task OnInitializedAsync()
         {
 
@@ -27,6 +29,17 @@ namespace EmployeeManagement.Web.Pages
 
         }
 
+        protected void EmployeeSelectionChange(bool isSelected)
+        {
+            if (isSelected)
+            {
+                SelectedEmployeeCount++;
+            }
+            else
+            {
+                SelectedEmployeeCount--;
+            }
+        }
         private void LoadEmployees()
         {
 
@@ -83,6 +96,10 @@ namespace EmployeeManagement.Web.Pages
             Employees = new List<Employee> {employee1,employee2,employee3,employee4 };
 
         }
+
+
+
+      
 
     }
 }

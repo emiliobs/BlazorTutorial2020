@@ -7,13 +7,26 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagement.Web.Pages
 {
+
     public class DisplayEmployeeBase  : ComponentBase
     {
+      protected bool IsSelected { get; set; }
+    
+      [Parameter]
+        public EventCallback<bool> OnEmployeeSelection { get; set; }
+
         [Parameter]
         public Employee Employee { get; set; }
         
         [Parameter]
-        public bool showFooter { get; set; }
+        public bool ShowFooter { get; set; }
+
+
+         protected async Task CheckBoxChange(ChangeEventArgs e)
+        {
+            IsSelected = (bool)e.Value;
+            await OnEmployeeSelection.InvokeAsync(IsSelected);
+        }
 
     }
 }

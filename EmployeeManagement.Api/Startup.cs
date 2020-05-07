@@ -37,8 +37,8 @@ namespace EmployeeManagement.Api
             });
 
             //rest of the code
-            services.AddScoped<IDepartmentRespository, DepartmentRespository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IDepartmentRespository, DepartmentRespository>();
 
            
             //Rest of code

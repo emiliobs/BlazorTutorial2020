@@ -14,6 +14,13 @@ namespace EmployeeManagement.Web.Pages
 
         [Inject]
         public IEmployeeService EmployeeService { get; set; }
+        
+        [Inject]
+        public IDepartmentService DepartmentService { get; set; }
+
+        public List<Department> Departments { get; set; } = new List<Department>();
+
+        public string DepartmentId { get; set; }
 
         [Parameter]
         public string Id { get; set; }
@@ -21,6 +28,8 @@ namespace EmployeeManagement.Web.Pages
         protected async override Task OnInitializedAsync()
         {
             Employee = await EmployeeService.GetEmployeeById(int.Parse(Id));
+            Departments = (await DepartmentService.GetAllDepartments()).ToList();
+            DepartmentId = Employee.DepartmentId.ToString();
         }
     }
 }

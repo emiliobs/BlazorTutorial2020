@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EmployeeManagement.Api.Repository
+namespace EmployeeManagement.Web.Services
 {
-    public interface IDepartmentRespository
+    public interface IDepartmentService
     {
         Task<IEnumerable<Department>> GetAllDepartments();
         Task<Department> GetDepartmentById(int departmentId);

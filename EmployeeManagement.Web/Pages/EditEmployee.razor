@@ -3,8 +3,10 @@
 @inherits EditEmployeeBase
 
     <EditForm Model="Employee">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
         <h3>Edit Employee</h3>
         <hr />
+        @*<ValidationSummary></ValidationSummary>*@
         <div class="form-group row">
             <label for="firstName" class="col-sm-2 col-form-label">
                 First Name
@@ -12,6 +14,7 @@
             <div class="col-sm-10">
                 <InputText id="firstName" class="form-control" placeholder="First Name"
                            @bind-Value="Employee.FirstName" />
+                <ValidationMessage For="@(() => Employee.FirstName)"></ValidationMessage>
             </div>
         </div>
         <div class="form-group row">
@@ -21,6 +24,7 @@
             <div class="col-sm-10">
                 <InputText id="lastName" class="form-control" placeholder="Last Name"
                            @bind-Value="Employee.LastName" />
+                <ValidationMessage For="@(() => Employee.LastName)"></ValidationMessage>
             </div>
         </div>
         <div class="form-group row">
@@ -30,6 +34,7 @@
             <div class="col-sm-10">
                 <InputText id="email" class="form-control" placeholder="Email"
                            @bind-Value="Employee.Email" />
+                <ValidationMessage For="@(() => Employee.Email)"></ValidationMessage>
             </div>
         </div>
         <div class="col-group row mb-3">
@@ -53,7 +58,7 @@
             </div>
         </div>
 
-        <div class="col-group row">
+        <div class="col-group row mb-3">
             <label for="gender" class="col-sm-2 col-form-label">
                 Gender
             </label>
@@ -65,6 +70,15 @@
                         <option value="@gender">@gender</option>
                     }
                 </InputSelect>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="dateOfBirth" class="col-sm-2 col-form-label">
+                Date of birth
+            </label>
+            <div class="col-sm-10">
+                <InputDate @bind-Value="Employee.DateOfBirth" class="form-control"></InputDate>
+                <ValidationMessage For="(() => Employee.DateOfBirth)"></ValidationMessage>
             </div>
         </div>
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmployeeManagement.Models.CustomValidator;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -12,15 +13,23 @@ namespace EmployeeManagement.Models
         [Required]
         [StringLength(100, MinimumLength = 2)]
         public string FirstName { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "FirstName must be provided")]
         public string LastName { get; set; }
+
+        [EmailDomainValidator(AllowedDomain = "emisof.com")]
         [Required]
+        [EmailAddress]
         public string Email { get; set; }
+
         public DateTime DateOfBirth{ get; set; }
+
         public Gender Gender { get; set; }
 
         public Department Department { get; set; }
+
         public int DepartmentId { get; set; }
+
         public string PhotoPath { get; set; }
 
         public string FullName => $"{FirstName} {LastName}";

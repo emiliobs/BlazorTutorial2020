@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace EmployeeManagement.Models
@@ -17,10 +18,12 @@ namespace EmployeeManagement.Models
         [Required(ErrorMessage = "FirstName must be provided")]
         public string LastName { get; set; }
 
-        [EmailDomainValidator(AllowedDomain = "emisof.com")]
+        [EmailDomainValidator(AllowedDomain = "emisoft.com", ErrorMessage = "Only Emisoft.com is allowed.")]
         [Required]
         [EmailAddress]
         public string Email { get; set; }
+
+        
 
         public DateTime DateOfBirth{ get; set; }
 

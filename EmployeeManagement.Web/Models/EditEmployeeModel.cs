@@ -15,5 +15,12 @@ namespace EmployeeManagement.Web.Models
         [CompareProperty("Email", ErrorMessage = "Email and Confirm Email must match.")]
         public string ConfirmEmail { get; set; }
 
+        [ValidateComplexType]
+        public Department Department { get; set; } = new Department();
+
+        public int DepartmentId { get; set; }
+
+
+
     }
 }

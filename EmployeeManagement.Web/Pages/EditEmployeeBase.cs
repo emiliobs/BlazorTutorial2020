@@ -1,4 +1,5 @@
-﻿using EmployeeManagement.Models;
+﻿using AutoMapper;
+using EmployeeManagement.Models;
 using EmployeeManagement.Web.Models;
 using EmployeeManagement.Web.Services;
 using Microsoft.AspNetCore.Components;
@@ -20,6 +21,9 @@ namespace EmployeeManagement.Web.Pages
         [Inject]
         public IDepartmentService DepartmentService { get; set; }
 
+        [Inject]
+        public IMapper Mapper { get; set; }
+
         public List<Department> Departments { get; set; } = new List<Department>();
 
         //public string DepartmentId { get; set; }
@@ -33,16 +37,18 @@ namespace EmployeeManagement.Web.Pages
             Departments = (await DepartmentService.GetAllDepartments()).ToList();
             //DepartmentId = Employee.DepartmentId.ToString();
 
-            EditEmployeeModel.EmployeeId = Employee.EmployeeId;
-            EditEmployeeModel.FirstName = Employee.FirstName;
-            EditEmployeeModel.LastName = Employee.LastName;
-            EditEmployeeModel.Email = Employee.Email;
-            EditEmployeeModel.ConfirmEmail = Employee.Email;
-            EditEmployeeModel.DateOfBirth = Employee.DateOfBirth;
-            EditEmployeeModel.Gender = Employee.Gender;
-            EditEmployeeModel.PhotoPath = Employee.PhotoPath;
-            EditEmployeeModel.DepartmentId = Employee.DepartmentId;
-            EditEmployeeModel.Department = Employee.Department;
+            Mapper.Map(Employee, EditEmployeeModel);
+
+            //EditEmployeeModel.EmployeeId = Employee.EmployeeId;
+            //EditEmployeeModel.FirstName = Employee.FirstName;
+            //EditEmployeeModel.LastName = Employee.LastName;
+            //EditEmployeeModel.Email = Employee.Email;
+            //EditEmployeeModel.ConfirmEmail = Employee.Email;
+            //EditEmployeeModel.DateOfBirth = Employee.DateOfBirth;
+            //EditEmployeeModel.Gender = Employee.Gender;
+            //EditEmployeeModel.PhotoPath = Employee.PhotoPath;
+            //EditEmployeeModel.DepartmentId = Employee.DepartmentId;
+            //EditEmployeeModel.Department = Employee.Department;
             
 
         }

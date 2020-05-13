@@ -122,6 +122,7 @@ namespace EmployeeManagement.Api.Controllers
                 //}
 
                 Employee employeeUpdate = await _employeeRepository.GetEmployeeById(employee.EmployeeId);
+
                 if (employeeUpdate == null)
                 {
                     return NotFound($"Employee wint Id = {employee.EmployeeId} not found.");

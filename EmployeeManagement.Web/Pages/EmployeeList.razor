@@ -18,7 +18,12 @@ else
     <div class="card-deck">
     @foreach (var employee in Employees)
     {
-        <DisplayEmployee Employee="employee" ShowFooter="ShowFooter" OnEmployeeSelection="@EmployeeSelectionChange"></DisplayEmployee>
+        <DisplayEmployee Employee="employee" 
+                         ShowFooter="ShowFooter" 
+                         OnEmployeeSelection="@EmployeeSelectionChange"
+                         OnEmployeeDeleted="EmployeeDeleted">
+
+        </DisplayEmployee>
 
         @*<div class="card m-3" style="min-width: 18rem; max-width:30.5%;">
             <div class="card-header">

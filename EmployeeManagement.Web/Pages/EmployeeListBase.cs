@@ -1,6 +1,7 @@
 ﻿using EmployeeManagement.Models;
 using EmployeeManagement.Web.Services;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +9,10 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagement.Web.Pages
 {
-    public class EmployeeListBase  : ComponentBase
+    public class EmployeeListBase : ComponentBase
     {
+
+
         [Inject]
         public IEmployeeService EmployeeService { get; set; }
 
@@ -22,11 +25,12 @@ namespace EmployeeManagement.Web.Pages
 
         protected override async Task OnInitializedAsync()
         {
-
             //await Task.Run(LoadEmployees);
-
             Employees = (await EmployeeService.GetAllEmployees()).ToList();
-
+        }
+        protected async Task EmployeeDeleted()
+        {
+            Employees = (await EmployeeService.GetAllEmployees()).ToList();
         }
 
         protected void EmployeeSelectionChange(bool isSelected)
@@ -40,66 +44,68 @@ namespace EmployeeManagement.Web.Pages
                 SelectedEmployeeCount--;
             }
         }
+
+
         private void LoadEmployees()
         {
 
             System.Threading.Thread.Sleep(3000);
 
-            var employee1 = new Employee 
+            Employee employee1 = new Employee
             {
                 EmployeeId = 1,
                 FirstName = "Emilio",
                 LastName = "Barrera",
                 Email = "emilio@gmail.com",
-                DateOfBirth = new DateTime(1975,04,09),
+                DateOfBirth = new DateTime(1975, 04, 09),
                 Gender = Gender.Male,
                 DepartmentId = 1,
                 PhotoPath = "images/john.png",
             };
 
-            var employee2 = new Employee
+            Employee employee2 = new Employee
             {
                 EmployeeId = 1,
                 FirstName = "Sam",
                 LastName = "Galloway",
                 Email = "emilio@gmail.com",
-                DateOfBirth = new DateTime(1985,04,25),
+                DateOfBirth = new DateTime(1985, 04, 25),
                 Gender = Gender.Male,
                 DepartmentId = 1,
                 PhotoPath = "images/sam.jpg",
             };
 
-            var employee3 = new Employee
+            Employee employee3 = new Employee
             {
                 EmployeeId = 3,
                 FirstName = "Mary",
                 LastName = "Smith",
                 Email = "mary@pragimtech.com",
-                DateOfBirth = new DateTime( 1979, 11, 11),
+                DateOfBirth = new DateTime(1979, 11, 11),
                 Gender = Gender.Female,
                 DepartmentId = 1,
                 PhotoPath = "images/mary.png"
             };
 
-            var employee4 = new Employee
+            Employee employee4 = new Employee
             {
                 EmployeeId = 3,
                 FirstName = "Sara",
                 LastName = "Longway",
                 Email = "sara@pragimtech.com",
-                DateOfBirth = new DateTime(1978,09, 12),
+                DateOfBirth = new DateTime(1978, 09, 12),
                 Gender = Gender.Female,
                 DepartmentId = 1,
                 PhotoPath = "images/sara.png"
             };
 
-            Employees = new List<Employee> {employee1,employee2,employee3,employee4 };
+            Employees = new List<Employee> { employee1, employee2, employee3, employee4 };
 
         }
 
 
 
-      
+
 
     }
 }

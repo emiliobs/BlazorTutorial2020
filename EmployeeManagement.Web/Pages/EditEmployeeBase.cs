@@ -19,17 +19,19 @@ namespace EmployeeManagement.Web.Pages
 
         [Inject]
         public IEmployeeService EmployeeService { get; set; }
-        
+
         [Inject]
         public IDepartmentService DepartmentService { get; set; }
 
         [Inject]
         public IMapper Mapper { get; set; }
-        
+
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
         public List<Department> Departments { get; set; } = new List<Department>();
+
+        protected Emisoft.Component.ConfirmBase DeleteConfirmation { get; set; }
 
         //public string DepartmentId { get; set; }
 
@@ -100,10 +102,23 @@ namespace EmployeeManagement.Web.Pages
             }
         }
 
-        protected async Task DeleteEmployee()
+        protected void DeleteEmployee()
         {
-            await EmployeeService.DeleteEmployee(Employee.EmployeeId);
-            NavigationManager.NavigateTo("/");
+            DeleteConfirmation.Show();  
+        }
+        //protected async Task DeleteEmployee()
+        //{
+        //    await EmployeeService.DeleteEmployee(Employee.EmployeeId);
+        //    NavigationManager.NavigateTo("/");
+        //}
+
+        protected async Task ConfirmDelete_Click(bool deleteConfirmed)
+        {
+            if (deleteConfirmed)
+            {
+                await EmployeeService.DeleteEmployee(Employee.EmployeeId);
+                NavigationManager.NavigateTo("/");
+            }
         }
     }
 }

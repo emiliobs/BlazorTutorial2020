@@ -97,14 +97,14 @@
     </div>
 
     @*<div class="col-group row mb-3">
-        <label for="departmentName" class="col-sm-2 col-form-label">
-            Department Name
-        </label>
-        <div id="departmentName" class="col-sm-10">
-            <InputText @bind-Value="@EditEmployeeModel.Department.DepartmentName" class="form-control"></InputText>
-            <ValidationMessage For="@(() => EditEmployeeModel.Department.DepartmentName)"></ValidationMessage>
-        </div>
-    </div>*@
+            <label for="departmentName" class="col-sm-2 col-form-label">
+                Department Name
+            </label>
+            <div id="departmentName" class="col-sm-10">
+                <InputText @bind-Value="@EditEmployeeModel.Department.DepartmentName" class="form-control"></InputText>
+                <ValidationMessage For="@(() => EditEmployeeModel.Department.DepartmentName)"></ValidationMessage>
+            </div>
+        </div>*@
 
 
 
@@ -117,3 +117,7 @@
         <a href="/" class="btn btn-dark">Back</a>
     </div>
 </EditForm>
+
+<Confirm ConfirmationChanged="ConfirmDelete_Click" @ref="DeleteConfirmation"
+         ConfirmationMessage=@($"Are you sure you want to Delete \"{EditEmployeeModel.FullName}\"")>
+</Confirm>

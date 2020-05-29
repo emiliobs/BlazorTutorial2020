@@ -15,8 +15,6 @@ namespace EmployeeManagement.Web.Pages
         [Parameter]
         public EventCallback<int> OnEmployeeDeleted { get; set; }
 
-
-
         [Inject]
         public IEmployeeService EmployeeService { get; set; }
         [Inject]
@@ -34,6 +32,7 @@ namespace EmployeeManagement.Web.Pages
         [Parameter]
         public bool ShowFooter { get; set; }
 
+        protected Emisoft.Component.ConfirmBase DeleteConfirmation { get; set; }
 
         protected async Task CheckBoxChange(ChangeEventArgs e)
         {
@@ -41,12 +40,27 @@ namespace EmployeeManagement.Web.Pages
             await OnEmployeeSelection.InvokeAsync(IsSelected);
         }
 
-        protected async Task DeleteEmployee()
+        protected void DeleteEmployee()
         {
-            await EmployeeService.DeleteEmployee(Employee.EmployeeId);
-            await OnEmployeeDeleted.InvokeAsync(Employee.EmployeeId);
-           // NavigationManager.NavigateTo("/", true);
+            DeleteConfirmation.Show();
         }
+        
+        protected async Task ConfirmDelete_Click(bool deleteConfirm)
+        {
+            if (deleteConfirm)
+            {
+                await EmployeeService.DeleteEmployee(Employee.EmployeeId);
+                await OnEmployeeDeleted.InvokeAsync(Employee.EmployeeId);
+            }
+        }
+
+
+        //protected async Task DeleteEmployee()
+        //{
+        //    await EmployeeService.DeleteEmployee(Employee.EmployeeId);
+        //    await OnEmployeeDeleted.InvokeAsync(Employee.EmployeeId);
+        //    // NavigationManager.NavigateTo("/", true);
+        //}
 
     }
 }

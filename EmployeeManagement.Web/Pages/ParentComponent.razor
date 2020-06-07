@@ -3,16 +3,15 @@
 <hr />
 
 @*<ChildComponent Required="required" MaxLength="100" Size="55" placeholder="Parent Component Placeholder"></ChildComponent>*@
-<ChildComponent InputAtributes="AtributeFromParent" Value="Hi emilio Blazor.!!!"></ChildComponent>
+<ChildComponent  placeholder="Parent component Placeholder" Value="Hi emilio Barrera form Parent" size="55" maxlength="55"> </ChildComponent>
 
 @code {
 
-    public Dictionary<string, object> AtributeFromParent { get; set; } = new Dictionary<string, object>
-{
-        { "required", "required" },
-        { "placeholder" , "Parent Component Placeholder"},
-        { "size" , "50" },
-        { "maxlength" , "5" }
-    };
+    //    public Dictionary<string, object> AtributeFromParent { get; set; } = new Dictionary<string, object>
+    //{
+
+    //        { "placeholder" , "Parent Component Placeholder"},
+
+    //    };
 
 }

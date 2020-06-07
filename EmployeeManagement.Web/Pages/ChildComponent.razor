@@ -1,7 +1,7 @@
 ﻿<h3>Child Component</h3>
 <hr />
 
-<input id="firstName" @attributes="InputAtributes" value="@Value" />
+<input id="firstName"  @attributes="InputAtributes" placeholder="Default Placeholder" value="@Value"  />
 
 @code {
 
@@ -12,12 +12,8 @@
 
     [Parameter] public string Value { get; set; }
 
-    [Parameter] public Dictionary<string, object> InputAtributes { get; set; } = new Dictionary<string, object>
-    {
-        {"required","required" },
-        { "placeholder" , "Child Coponent Placeholder" },
-        { "size" , "100"  },
-        { "maxtlength" , "15" }
-    };
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> InputAtributes { get; set; } = new Dictionary<string, object>();
+
 
 }

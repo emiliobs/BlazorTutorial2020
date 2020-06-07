@@ -1,0 +1,23 @@
+﻿<h3>Child Component</h3>
+<hr />
+
+<input id="firstName" @attributes="InputAtributes" value="@Value" />
+
+@code {
+
+    //[Parameter] public string Required { get; set; } = "required";
+    //[Parameter] public string MaxLength { get; set; } = "15";
+    //[Parameter] public string Size { get; set; } = "25";
+    //[Parameter] public string PlaceHolder { get; set; } = "Child Component Palceholder";
+
+    [Parameter] public string Value { get; set; }
+
+    [Parameter] public Dictionary<string, object> InputAtributes { get; set; } = new Dictionary<string, object>
+    {
+        {"required","required" },
+        { "placeholder" , "Child Coponent Placeholder" },
+        { "size" , "100"  },
+        { "maxtlength" , "15" }
+    };
+
+}

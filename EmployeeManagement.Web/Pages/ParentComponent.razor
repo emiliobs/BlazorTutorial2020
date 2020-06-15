@@ -1,16 +1,25 @@
 ﻿@page "/ParentComponent"
-<h3>ParentComponent</h3>
+
+<h1 style="@Style">Parent Component</h1>
 <hr />
 
 @*<ChildComponent Required="required" MaxLength="100" Size="55" placeholder="Parent Component Placeholder"></ChildComponent>*@
-<ChildComponent  placeholder="Parent component Placeholder" Value="Hi emilio Barrera form Parent" size="55" maxlength="55"> </ChildComponent>
+<CascadingValue Value="@Style">
+
+    <ChildComponent>
+
+    </ChildComponent>
+
+</CascadingValue>
 
 @code {
 
-    //    public Dictionary<string, object> AtributeFromParent { get; set; } = new Dictionary<string, object>
+    public string Style { get; set; } = "color:red";
+
+    //public dictionary<string, object> atributefromparent { get; set; } = new dictionary<string, object>
     //{
 
-    //        { "placeholder" , "Parent Component Placeholder"},
+    //        { "placeholder" , "parent component placeholder"},
 
     //    };
 

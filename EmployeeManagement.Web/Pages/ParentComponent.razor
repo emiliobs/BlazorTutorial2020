@@ -1,23 +1,27 @@
 ﻿@page "/ParentComponent"
 
-<h1 style="@Style">Parent Component</h1>
+<h1>Parent Component - @Counter</h1>
 <hr />
+<button class="btn btn-primary" @onclick="IncrementCounter">
+    Increment Count.
+</button>
 
 @*<ChildComponent Required="required" MaxLength="100" Size="55" placeholder="Parent Component Placeholder"></ChildComponent>*@
-<CascadingValue Value="@Style" Name="ColorStyle">
-    <CascadingValue Value="@BorderStyle" Name="BorderStyle">
+@*<CascadingValue Value="@Style" Name="ColorStyle">*@
+    <CascadingValue Value="@Counter" Name="Counter" IsFixed="false">
         <ChildComponent>
 
         </ChildComponent>
     </CascadingValue>
     
 
-</CascadingValue>
+@*</CascadingValue>*@
 
 @code {
 
-    public string Style { get; set; } = "color:red";
-    public string BorderStyle { get; set; } = "border:1px solid red";
+    public int Counter { get; set; }
+    //public string Style { get; set; } = "color:red";
+    //public string BorderStyle { get; set; } = "border:1px solid red";
 
     //public dictionary<string, object> atributefromparent { get; set; } = new dictionary<string, object>
     //{
@@ -25,5 +29,10 @@
     //        { "placeholder" , "parent component placeholder"},
 
     //    };
+
+    private void IncrementCounter()
+    {
+        Counter = Counter + 1;
+    }
 
 }
